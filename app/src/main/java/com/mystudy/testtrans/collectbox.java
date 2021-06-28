@@ -31,14 +31,18 @@ public class collectbox extends Activity {
 
     private String user;
     private ListView listView ;
-    ArrayList<String> trans1;
 
+    private ArrayList<String> trans1;
     private ArrayList<String> selectwordlist = new ArrayList<>();
     private ArrayList<String> selecttolist = new ArrayList<>();
 
     private void setword(String word){
         selectwordlist.add(word);
     }
+    private void settrans(String trans){
+        trans1.add(trans);
+    }
+
 
     private void setto(String to){
         selecttolist.add(to);
@@ -66,6 +70,7 @@ public class collectbox extends Activity {
                     wordto.add(word.get(i).toString()+"("+to.get(i).toString()+")");
                     setword(word.get(i).toString());
                     setto(to.get(i).toString());
+                    //settrans(trans.get(i).toString());
                 }
 
 
@@ -131,7 +136,7 @@ public class collectbox extends Activity {
                         BmobQuery<word> wordBmobQuery = new BmobQuery<>();
                         wordBmobQuery.addWhereEqualTo("word",delete_name);
                         wordBmobQuery.addWhereEqualTo("to",delete_to);
-                        wordBmobQuery.addWhereEqualTo("trans",trans1.get(position));
+                        //wordBmobQuery.addWhereEqualTo("trans",trans1.get(position).toString());
                         wordBmobQuery.addWhereEqualTo("user",user);
                         wordBmobQuery.findObjects(new FindListener<word>() {
                             @Override
