@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
                     }
                 });
-
                 //设置收藏按钮
                 BmobQuery<word> wordBmobQuery = new BmobQuery<>();
                 wordBmobQuery.addWhereEqualTo("word",input);
@@ -414,26 +413,19 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 break;
             case R.id.tv_translation://翻译
                 translation();//翻译
-                //获取输入内容
-                inputTx = edContent.getText().toString().trim();
+                inputTx = edContent.getText().toString().trim(); //获取输入内容
                 String resultTx1 = tvResult.getText().toString().trim();
                 String from = tvFrom.getText().toString();
                 String to = tvTo.getText().toString();
-                //showMsg(inputTx);
-                //初始化收藏按钮并判断是否已经收藏
                 init_collect(inputTx,from,to);
-                //init_history(inputTx,resultTx1,user,from,to);
 
                 break;
             case R.id.collect://收藏按键
-                //获取输入内容
-                inputTx = edContent.getText().toString().trim();
-                //获取输出内容
-                String resultTx = tvResult.getText().toString().trim();
+                inputTx = edContent.getText().toString().trim();//获取输入内容
+                String resultTx = tvResult.getText().toString().trim();//获取输出内容
                 String from1 = tvFrom.getText().toString();
                 String to1 = tvTo.getText().toString();
-                //点击动作
-                collect_click(inputTx,resultTx,user,from1,to1);
+                collect_click(inputTx,resultTx,user,from1,to1);//点击动作
                 break;
             case R.id.collect_btn://收藏夹
                 Intent main2collect=new Intent(MainActivity.this,collectbox.class);
@@ -450,12 +442,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         }
     }
 
-    private void init_history(String inputTx,String resultTx,String user,String from,String to) {
-
-
-    }
-
-    private void collect_click(String inputTx,String resultTx,String user,String from,String to) {
+    private void collect_click(String inputTx,String resultTx,
+                               String user,String from,String to) {
         word word1 =new word();
         word1.setWord(inputTx);
         word1.setTrans(resultTx);
@@ -525,7 +513,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         byte[] hash;
 
         try {
-            hash = MessageDigest.getInstance("MD5").digest(string.getBytes("UTF-8"));
+            hash = MessageDigest.getInstance("MD5")
+                    .digest(string.getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
@@ -551,7 +540,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         //通用翻译API HTTPS地址：
         //https://fanyi-api.baidu.com/api/trans/vip/translate
 
-        String httpStr = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+        //String httpStr = "http://api.fanyi.baidu.com/api/trans/vip/translate";
         String httpsStr = "https://fanyi-api.baidu.com/api/trans/vip/translate";
         //拼接请求的地址
         String url = httpsStr +
@@ -595,6 +584,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                     tvTranslation.setVisibility(View.GONE);
                     //显示翻译的结果
                     tvResult.setText(result.getTrans_result().get(0).getDst());
+                    tvResult.setText(object.toString());
                     resultLay.setVisibility(View.VISIBLE);
                     beforeLay.setVisibility(View.GONE);
                     afterLay.setVisibility(View.VISIBLE);

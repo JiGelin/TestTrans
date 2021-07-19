@@ -27,7 +27,7 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-    <!--滚动视图 当内容高度超出屏幕高度时可以上下滚动-->
+    <!--滚动视图  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -74,6 +74,7 @@ public class registerActivity extends AppCompatActivity {
         psw=findViewById(R.id.editPassword);
         pswagain=findViewById(R.id.editrePassword);
         mRg1 = (RadioGroup) findViewById(R.id.rg_1);
+        zhuce = (Button) findViewById(R.id.register);
         mRg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -83,65 +84,41 @@ public class registerActivity extends AppCompatActivity {
                 //显示点击
             }
         });
-        zhuce = (Button) findViewById(R.id.register);
         zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strname=username.getText().toString();//获取用户名
-                String strpassword=psw.getText().toString();//获取密码
-                String strrepassword=pswagain.getText().toString();
-                if(strpassword.equals(strrepassword))
-                {
-                    //Toast.makeText(registerActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-                    Use p2 = new Use();
-                    p2.setName(strname);
-                    p2.setPsw(strpassword);
-                    p2.setSex(Sex);
-                    p2.save(new SaveListener<String>() {
-                        @Override
-                        public void done(String objectId, BmobException e) {
-                            if(e==null){
-                                Toast.makeText(registerActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(registerActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                String strname = username.getText().toString();//获取用户名
+                String strpassword = psw.getText().toString();//获取密码
+                String strrepassword = pswagain.getText().toString();
+                if(strpassword.length()!= 0&& strname.length()!=0){
+                    if (strpassword.equals(strrepassword)) {
+                        //Toast.makeText(registerActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                        Use p2 = new Use();
+                        p2.setName(strname);
+                        p2.setPsw(strpassword);
+                        p2.setSex(Sex);
+                        p2.save(new SaveListener<String>() {
+                            @Override
+                            public void done(String objectId, BmobException e) {
+                                if (e == null) {
+                                    Toast.makeText(registerActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(registerActivity.this, "用户名已存在", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
 
-                    });
-                    Intent registertoMain=new Intent(registerActivity.this,login_activity.class);
-                    startActivity(registertoMain);
-                }
-                else
-                {
-                    Toast.makeText(registerActivity.this,"两次密码不一致",Toast.LENGTH_SHORT).show();
+                        });
+                        Intent registertoMain = new Intent(registerActivity.this, login_activity.class);
+                        startActivity(registertoMain);
+                    } else {
+                        Toast.makeText(registerActivity.this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    Toast.makeText(registerActivity.this, "请完善注册信息！", Toast.LENGTH_SHORT).show();
                 }
 
-                //连接数据库存储注册数据
-//                String driverName="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-//                String dbURL="jdbc:jtds:sqlserver://172.25.76.215:1433;DatabaseName=app";
-//                try {
-//
-//                      try {
-//                        Class.forName(driverName);
-//                        } catch (ClassNotFoundException e1) {
-//                        // TODO Auto-generated catch block
-//                        e1.printStackTrace();
-//                        }
-//
-//                    Connection con= DriverManager.getConnection(dbURL, "zht", "123123");
-//                    Toast.makeText(registerActivity.this,"连接数据库成功",Toast.LENGTH_SHORT).show();
-//                    Statement st2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-//                    //创建一个查询
-//                    String sql = "INSERT INTO test values("+strname+","+strpassword+")";
-//                    st2.execute(sql);
-//                } catch (SQLException throwables) {
-//                    throwables.printStackTrace();
-//                    Toast.makeText(registerActivity.this,"连接数据库失败",Toast.LENGTH_SHORT).show();
-//                }
             }
-
-        });
-
+            });
     }
-
 }

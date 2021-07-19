@@ -56,28 +56,20 @@ public class collectbox extends Activity {
             ArrayList<String> to = new ArrayList<>();
             ArrayList<String> wordto = new ArrayList<>();
             int wordsize = msg.arg1;
-
             super.handleMessage(msg);
             if (msg.what == 0){
                 Bundle bundle = msg.getData();
                 word = bundle.getStringArrayList("word");
-
                 trans = bundle.getStringArrayList("trans");
-
                 to = bundle.getStringArrayList("to");
-
                 for (int i = 0;i<wordsize;i++){
                     wordto.add(word.get(i).toString()+"("+to.get(i).toString()+")");
                     setword(word.get(i).toString());
                     setto(to.get(i).toString());
-                    //settrans(trans.get(i).toString());
                 }
-
-
-                //showMsg(Integer.toString(wordsize));
-
-                //如果不在主函数中，this需要前加上activity的名字，不能直接用this
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(collectbox.this, android.R.layout.simple_expandable_list_item_1,wordto);
+                //笔记：如果不在主函数中，this需要前加上activity的名字，不能直接用this
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(collectbox.this,
+                        android.R.layout.simple_expandable_list_item_1,wordto);
 
                 listView.setAdapter(adapter);
                 ArrayList<String> finalTrans = trans;
@@ -120,7 +112,6 @@ public class collectbox extends Activity {
     }
 
     private void inititem() {
-
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -145,7 +136,6 @@ public class collectbox extends Activity {
                                 word1.delete(new UpdateListener() {
                                     @Override
                                     public void done(BmobException e) {
-
                                         if (e == null){
                                             showMsg("您已删除单词"+parent.getItemAtPosition(position).toString());
                                             onCreate(null);
@@ -157,12 +147,13 @@ public class collectbox extends Activity {
                             }
                         });
                     }
-
                 });
 
-                builder.setNegativeButton("舍不得，还是算了吧", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("舍不得，还是算了吧",
+                        new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
                         showMsg("已取消删除操作");
                     }
                 });

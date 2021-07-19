@@ -34,6 +34,7 @@ public class login_activity extends AppCompatActivity {
         denglu=(Button)findViewById(R.id.button);
         username=findViewById(R.id.editTextNumber);
         psw=findViewById(R.id.editTextPassword);
+        zhuce=(Button)findViewById(R.id.zhuce);
         denglu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,6 @@ public class login_activity extends AppCompatActivity {
                                         showMsg("密码错误");
                                     }
                                 }
-
                             }
                             else{
                                 showMsg("用户名不存在！");
@@ -70,11 +70,9 @@ public class login_activity extends AppCompatActivity {
                 }else {
                     showMsg("请输入用户名！！");
                 }
-
-
             }
         });
-        zhuce=(Button)findViewById(R.id.zhuce);
+
         zhuce.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
